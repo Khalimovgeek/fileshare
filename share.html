@@ -7,13 +7,14 @@
     <style>
         body{
             font-family: sans-serif;
+            text-transform: capitalize;
         }
         #share{
             display: flex;
             flex-direction: column;
             border: 1px solid gray;
             border-radius: 10px;
-            width: 50%;
+            width: 80%;
             align-items: center;
             justify-content: center;
             margin: auto;
@@ -24,9 +25,10 @@
         #submit{
             color: white;
             background-color:   rgb(73, 214, 73);
+            padding: 10px;
             border-radius: 15px;
-            width: 30%;
-            height: 30px;
+            width: 80%;
+            height: auto;
             border: 1px solid gray;
             font-size: medium;
         }
@@ -66,7 +68,7 @@
 <body>
     <form id="share" method="post" enctype="multipart/form-data">
         <h3>Please select the file</h3>
-        <input type="file" name="" id="file-upload">
+        <input type="file" name="file" id="file-upload">
         <label for="file-upload" class="custom-file-upload">
             Select Files
         </label>
