@@ -6,7 +6,9 @@
     <title>Share files</title>
     <style>
         body{
-            padding-top: 30px;
+            background: linear-gradient(to bottom right, rgb(204, 0, 255), rgb(19, 231, 97));
+            height: 100vh;
+            color: rgb(255, 252, 252);
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -14,6 +16,8 @@
             text-transform: capitalize;
         }
         .send,.recieve{
+            background-color: white;
+            color: black;
             display: flex;
             flex-direction: column;
             border: 1px solid gray;
@@ -24,6 +28,7 @@
             margin: auto;
             gap: 10px;
             padding-bottom: 10px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
 
         }
         .recieve{
@@ -94,6 +99,7 @@
         }
         #switch{
             background: none;
+            color: white;
             border: none;
             margin-left: 80%;
             margin-bottom: 20px;
