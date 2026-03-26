@@ -13,7 +13,7 @@
             font-family: sans-serif;
             text-transform: capitalize;
         }
-        #share{
+        .send,.recieve{
             display: flex;
             flex-direction: column;
             border: 1px solid gray;
@@ -25,6 +25,9 @@
             gap: 10px;
             padding-bottom: 10px;
 
+        }
+        .recieve{
+            display: none;
         }
         #submit{
             color: white;
@@ -68,7 +71,7 @@
             color: red;
         }
         .progress{
-            margin-top: 50px;
+            margin-top: 5px;
             width: 80%;
             height: 30px;
             border: 1px solid grey;
@@ -78,7 +81,7 @@
         }
         .p1{
             display: flex;
-            background-color: rgb(27, 212, 27);
+            background-color: rgb(31, 207, 31);
             width: 30%;
             height: 100%;
             border-radius: 30px 0 0 30px;
@@ -86,20 +89,28 @@
             color: rgb(255, 255, 255);
         }
         #pval{
-            position: relative;
-            left: 80%;
+            position: sticky;
+            left: 90%;
         }
-    </style>
-    <script>
-        function progress(){
-            let val = 20;
+        #switch{
+            background: none;
+            border: none;
+            margin-left: 80%;
+            margin-bottom: 20px;
+            font-size: medium;
 
-            
         }
-    </script>
+        #switch:hover{
+            text-decoration: underline;
+            color: red;
+        }
+
+    </style>
 </head>
 <body>
-    <form id="share" method="post" enctype="multipart/form-data">
+    <button id="switch" onclick="switchDiv()">recieve</button>
+    <form class="send" method="post" enctype="multipart/form-data">
+        <h2>Send Files</h2>
         <h3>Please select the file</h3>
         <input type="file" name="file" id="file-upload">
         <label for="file-upload" class="custom-file-upload">
@@ -107,16 +118,73 @@
         </label>
         <input type="submit" value="submit" id="submit">
     </form>
+    <div class="recieve">
+        <h2>recieve Files</h2>
+        <h3>Please wait for the Qr code</h3>
+
+    </div>
+
+
     <h3>Progress</h3>
     <div class="progress">
         <div class="p1">
             <p id="pval">30</p>
-        </div>
-        <div class="p2">
-            
-        </div>
-        
+        </div> 
     </div>
-    
+    <h3>Speed</h3>
+    <p id="speed"></p>
+    <script>
+        // progress bar funtion
+         async function progress(value){
+            if (value > 90){
+                document.querySelector(".p1").style.borderRadius = "30px" ;
+
+            }
+            value += "%";
+            document.querySelector(".p1").style.width = value ;
+            document.getElementById("pval").textContent =value;
+            await sleep(1000);
+
+        }
+        // switch change
+        function caseValue(value,value2){
+            document.getElementById("switch").innerHTML = value;
+            document.querySelector("."+ value).style.display = "none";
+            document.querySelector("."+ value2).style.display = "flex";
+
+        }
+
+        // recieve  function
+        function switchDiv(){
+            let current = document.getElementById("switch").innerHTML;
+            switch(current){
+                case "recieve":
+                    caseValue("send",current);
+
+                    break;
+                case "send":
+                    caseValue("recieve",current);
+                    break;
+                default:
+                    caseValue("recieve",current);
+                    break;
+            }
+
+        }
+        // fetch qr 
+        function showQr(){
+            // needs implementation
+        }
+        // delay function
+        function sleep(ms) {
+            return new Promise(resolve => setTimeout(resolve, ms));
+        }
+
+        // dummy call for function to display progress
+        progress(91);
+
+        // dummy speed
+        document.getElementById("speed").innerText = "30kbps";
+    </script>
 </body>
 </html>
