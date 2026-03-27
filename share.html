@@ -110,6 +110,25 @@
             text-decoration: underline;
             color: red;
         }
+        .qr{
+            padding: 10px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 150px;
+            height: 175px;
+            border-radius: 10px;
+            box-shadow: 
+                        0 4px 6px rgba(0,0,0,0.1),
+                        0 10px 15px rgba(0,0,0,0.15);
+            transition: all 0.3s ease;
+        }
+        .qr:hover{
+            transform: translateY(-6px) scale(1.02);
+            box-shadow: 
+                0 8px 12px rgba(0,0,0,0.15),
+                0 20px 25px rgba(0,0,0,0.25);
+        }
 
     </style>
 </head>
@@ -126,8 +145,12 @@
     </form>
     <div class="recieve">
         <h2>recieve Files</h2>
-        <h3>Please wait for the Qr code</h3>
-
+        <h3 id="qr_h3">Please wait for the Qr code</h3>
+        <div class="qr">
+            <!--  qr placeholder -->
+            <img id="qr_img" src="" width="150px" alt="QR Code">
+        </div>
+        
     </div>
 
 
@@ -178,9 +201,15 @@
 
         }
         // fetch qr 
-        function showQr(){
-            // needs implementation
+        function showQr(image_path){
+            document.getElementById("qr_h3").innerHTML = "Scan the Qr to connect";
+            document.getElementById("qr_img").src = image_path;
+            
         }
+
+        // test call for image show
+        showQr("test_image/qrcode_325734057_912a234f3e4c78d7e9776f5269c1b42e.png");
+
         // delay function
         function sleep(ms) {
             return new Promise(resolve => setTimeout(resolve, ms));

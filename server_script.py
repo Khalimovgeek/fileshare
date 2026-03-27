@@ -25,4 +25,6 @@ class SimpleUpload(BaseHTTPRequestHandler):
         self.end_headers()
         self.wfile.write(b"Upload successful")
 
+    
+
 HTTPServer(("0.0.0.0", 8000), SimpleUpload).serve_forever()
