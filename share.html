@@ -134,7 +134,7 @@
 </head>
 <body>
     <button id="switch" onclick="switchDiv()">recieve</button>
-    <form class="send" method="post" enctype="multipart/form-data">
+    <form class="send" action="/upload" method="post" enctype="multipart/form-data">
         <h2>Send Files</h2>
         <h3>Please select the file</h3>
         <input type="file" name="file" id="file-upload">
@@ -163,6 +163,9 @@
     <h3>Speed</h3>
     <p id="speed"></p>
     <script>
+        
+
+
         // progress bar funtion
          async function progress(value){
             if (value > 90){
@@ -201,14 +204,14 @@
 
         }
         // fetch qr 
-        function showQr(image_path){
+        function showQr(){
             document.getElementById("qr_h3").innerHTML = "Scan the Qr to connect";
-            document.getElementById("qr_img").src = image_path;
+            document.getElementById("qr_img").src = "/qr?" +Date.now();
             
         }
 
         // test call for image show
-        showQr("test_image/bing_generated_qrcode.png");
+        showQr();
 
         // delay function
         function sleep(ms) {
