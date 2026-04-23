@@ -4,14 +4,12 @@ import qrcode
 import socket
 from zeroconf import Zeroconf,ServiceInfo
 from io import BytesIO
-import os
-import json
-
+from server_script import SimpleUpload
 
 class HelperFunctions:
         
         def __init__(self, appname):
-            self.url = f"http:{appname}//.local:8000/"
+            self.url = f"http:{appname}.local:8000/"
             self.ip = self.find_my_ip()
             self.info = ServiceInfo(
                 "_http._tcp.local.",
@@ -42,21 +40,3 @@ class HelperFunctions:
             return buffer.getvalue()
         
         ip = socket.inet_aton(find_my_ip())
-
-
-
-
-
-
-
-
-
-    
-    
-    
-if __name__ == "__main__":
-    ip = HelperFunctions.find_my_ip()
-    
-    print(f"Open on phone: http://{ip}:8000")
-
-    HTTPServer(("0.0.0.0", 8000), SimpleUpload).serve_forever()

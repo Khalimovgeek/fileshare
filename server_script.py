@@ -7,19 +7,9 @@ from io import BytesIO
 import os
 import json
 
-
-# create directory if not exists
-UPLOAD_DIRS = "uploads"
-os.makedirs(UPLOAD_DIRS,exist_ok=True)
-
-# Routes
-
-ROUTES =  {
-    "/": "serve_html",
-    "/qr": "serve_qr",
-    "/files": "list_files", 
-}
-
+from routes import ROUTES
+from settings import UPLOAD_DIRS
+from helper import HelperFunctions
 
 
 class SimpleUpload(BaseHTTPRequestHandler):
@@ -107,66 +97,3 @@ class SimpleUpload(BaseHTTPRequestHandler):
         self.end_headers()
 
         self.wfile.write(img_bytes)
-
-
-    def calculate_speed():
-        pass
-
-    def calculate_progress():
-        pass
-
-
-
-
-
-class HelperFunctions:
-        def __init__(self):
-            self.url = "http://sharenet.local:8000/"
-            self.ip = self.find_my_ip()
-            self.info = ServiceInfo(
-                "_http._tcp.local.",
-                "ShareNet._http._tcp.local.",
-                addresses=[self.ip],
-                port=8000,
-                server="sharenet.local."
-            )
-        
-        
-        # find mac adress / ip adress 
-        @staticmethod
-        def find_my_ip():
-            s = socket.socket(socket.AF_INET,socket.SOCK_DGRAM)
-
-            try:
-                s.connect(("8.8.8.8",80))
-                return s.getsockname()[0]
-            finally:
-                s.close()
-
-        # generate qr
-        @staticmethod
-        def generate_qr(url):
-            qr = qrcode.make(url)
-            buffer = BytesIO()
-            qr.save(buffer,format="PNG")
-            return buffer.getvalue()
-        
-        ip = socket.inet_aton(find_my_ip())
-
-
-
-
-
-
-
-
-
-    
-    
-    
-if __name__ == "__main__":
-    ip = HelperFunctions.find_my_ip()
-    
-    print(f"Open on phone: http://{ip}:8000")
-
-    HTTPServer(("0.0.0.0", 8000), SimpleUpload).serve_forever()
