@@ -8,10 +8,12 @@ import os
 import json
 
 from routes import ROUTES
-from settings import UPLOAD_DIRS
 from helper import HelperFunctions
 
 
+# create uploads directory if not exists
+UPLOAD_DIRS = "uploads"
+os.makedirs(UPLOAD_DIRS,exist_ok=True)
 class SimpleUpload(BaseHTTPRequestHandler):
     def do_GET(self):
         handler = ROUTES.get(self.path)
