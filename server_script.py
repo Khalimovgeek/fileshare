@@ -1,9 +1,5 @@
-from http.server import HTTPServer,BaseHTTPRequestHandler
+from http.server import BaseHTTPRequestHandler
 import cgi
-import qrcode
-import socket
-from zeroconf import Zeroconf,ServiceInfo
-from io import BytesIO
 import os
 import json
 

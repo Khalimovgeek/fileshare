@@ -1,6 +1,4 @@
 from http.server import HTTPServer
-import os
-
 from crud import SimpleUpload
 from helper import HelperFunctions
 
